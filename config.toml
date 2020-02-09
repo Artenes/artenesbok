@@ -1,4 +1,4 @@
-baseurl = "//artenesbok.com/"
+baseurl = "https://artenesbok.com/"
 languageCode = "en-Us"
 theme = "hermit"
 DefaultContentLanguage = "en"

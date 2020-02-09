@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>databinding on Artenes&#39; BOK</title>
-    <link>//artenesbok.com/tags/databinding/</link>
+    <link>https://artenesbok.com/tags/databinding/</link>
     <description>Recent content in databinding on Artenes&#39; BOK</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-Us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Wed, 05 Feb 2020 18:46:07 -0400</lastBuildDate>
     
-	<atom:link href="//artenesbok.com/tags/databinding/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://artenesbok.com/tags/databinding/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using Data Binding on android</title>
-      <link>//artenesbok.com/posts/using_databinding_on_android/</link>
+      <link>https://artenesbok.com/posts/using_databinding_on_android/</link>
       <pubDate>Wed, 05 Feb 2020 18:46:07 -0400</pubDate>
       
-      <guid>//artenesbok.com/posts/using_databinding_on_android/</guid>
+      <guid>https://artenesbok.com/posts/using_databinding_on_android/</guid>
       <description>Let&amp;rsquo;s use data binding in an Android application.
 1.Enabling data binding in your build.gradle file.
 android { dataBinding { enabled = true } } 2.Using data binding in your xml layout file.

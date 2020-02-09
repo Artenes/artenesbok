@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Artenes&#39; BOK</title>
-    <link>//artenesbok.com/</link>
+    <link>https://artenesbok.com/</link>
     <description>Recent content on Artenes&#39; BOK</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-Us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Wed, 05 Feb 2020 18:46:07 -0400</lastBuildDate>
     
-	<atom:link href="//artenesbok.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://artenesbok.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using Data Binding on android</title>
-      <link>//artenesbok.com/posts/using_databinding_on_android/</link>
+      <link>https://artenesbok.com/posts/using_databinding_on_android/</link>
       <pubDate>Wed, 05 Feb 2020 18:46:07 -0400</pubDate>
       
-      <guid>//artenesbok.com/posts/using_databinding_on_android/</guid>
+      <guid>https://artenesbok.com/posts/using_databinding_on_android/</guid>
       <description>Let&amp;rsquo;s use data binding in an Android application.
 1.Enabling data binding in your build.gradle file.
 android { dataBinding { enabled = true } } 2.Using data binding in your xml layout file.
@@ -26,29 +26,29 @@ android { dataBinding { enabled = true } } 2.Using data binding in your xml layo
     
     <item>
       <title>Why Not Use Heroku for Your Ghost Blog</title>
-      <link>//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</link>
+      <link>https://artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</link>
       <pubDate>Wed, 26 Jun 2019 21:18:08 -0400</pubDate>
       
-      <guid>//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</guid>
+      <guid>https://artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</guid>
       <description>I tried to set up a personal blog for free using Heroku and Ghost. After some time trying to setup this, I&amp;rsquo;ve come to the conclusion that this really does not works as planned. The main problem is how Heroku works for our basic use case of a blog.
 How Heroku works For our needs to host a blog, Heroku is just a service where you can host your website files.</description>
     </item>
     
     <item>
       <title>Configuring Amazon Aws S3 to Store Images for Your Website</title>
-      <link>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</link>
+      <link>https://artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</link>
       <pubDate>Tue, 25 Jun 2019 19:12:55 -0400</pubDate>
       
-      <guid>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</guid>
+      <guid>https://artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</guid>
       <description>Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3.</description>
     </item>
     
     <item>
       <title>Using Robolectric for Unit Tests in Android</title>
-      <link>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</link>
+      <link>https://artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</link>
       <pubDate>Mon, 24 Jun 2019 21:01:34 -0400</pubDate>
       
-      <guid>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</guid>
+      <guid>https://artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</guid>
       <description>To start, add the following to your build.gradle file:
 android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &amp;#39;org.robolectric:robolectric:4.3&amp;#39; } And annotate your test with the Robolectric test runner:
 import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.</description>
@@ -56,10 +56,10 @@ import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::cla
     
     <item>
       <title>About</title>
-      <link>//artenesbok.com/about/</link>
+      <link>https://artenesbok.com/about/</link>
       <pubDate>Sat, 22 Jun 2019 13:52:33 -0400</pubDate>
       
-      <guid>//artenesbok.com/about/</guid>
+      <guid>https://artenesbok.com/about/</guid>
       <description>My name is Artenes Nogueira and I am a software engineer.
 I work with Android development and also have some experience with web development.
 Currently working at Samsung (SIDIA).
