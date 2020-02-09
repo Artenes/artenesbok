@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>test on Artenes&#39; BOK</title>
-    <link>https://artenesbok.com/tags/test/</link>
+    <link>//artenesbok.com/tags/test/</link>
     <description>Recent content in test on Artenes&#39; BOK</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-Us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Mon, 24 Jun 2019 21:01:34 -0400</lastBuildDate>
     
-	<atom:link href="https://artenesbok.com/tags/test/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//artenesbok.com/tags/test/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Using Robolectric for Unit Tests in Android</title>
-      <link>https://artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</link>
+      <link>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</link>
       <pubDate>Mon, 24 Jun 2019 21:01:34 -0400</pubDate>
       
-      <guid>https://artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</guid>
+      <guid>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</guid>
       <description>To start, add the following to your build.gradle file:
 android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &amp;#39;org.robolectric:robolectric:4.3&amp;#39; } And annotate your test with the Robolectric test runner:
 import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.</description>
