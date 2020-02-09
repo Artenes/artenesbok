@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-Us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+
+<meta itemprop="name" content="Using Robolectric for Unit Tests in Android">
+<meta itemprop="description" content="To start, add the following to your build.gradle file:
+android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &#39;org.robolectric:robolectric:4.3&#39; } And annotate your test with the Robolectric test runner:
+import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.">
+
+
+<meta itemprop="datePublished" content="2019-06-24T21:01:34-04:00" />
+<meta itemprop="dateModified" content="2019-06-24T21:01:34-04:00" />
+<meta itemprop="wordCount" content="686">
+
+
+
+<meta itemprop="keywords" content="android,test," />
+<meta property="og:title" content="Using Robolectric for Unit Tests in Android" />
+<meta property="og:description" content="To start, add the following to your build.gradle file:
+android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &#39;org.robolectric:robolectric:4.3&#39; } And annotate your test with the Robolectric test runner:
+import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/" />
+<meta property="article:published_time" content="2019-06-24T21:01:34-04:00"/>
+<meta property="article:modified_time" content="2019-06-24T21:01:34-04:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using Robolectric for Unit Tests in Android"/>
+<meta name="twitter:description" content="To start, add the following to your build.gradle file:
+android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &#39;org.robolectric:robolectric:4.3&#39; } And annotate your test with the Robolectric test runner:
+import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Using Robolectric for Unit Tests in Android</title>
+	<link rel="stylesheet" href="//artenesbok.com/css/style.min.568c54a56780af2a70c45272522247710b69dbfc080b315211fb98381e3796f8.css" integrity="sha256-VoxUpWeArypwxFJyUiJHcQtp2/wICzFSEfuYOB43lvg=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="//artenesbok.com/">Artenes&#39; BOK</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="//artenesbok.com/posts/">Posts</a>
+				<a href="//artenesbok.com/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="mailto:artenes.nogueira@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="https://github.com/Artenes" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="//artenesbok.com/posts/">Posts</a></li>
+			<li><a href="//artenesbok.com/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jun 24, 2019</span></div>
+				<h1>Using Robolectric for Unit Tests in Android</h1>
+			</header>
+			<div class="content">
+				
+
+<p>To start, add the following to your <code>build.gradle</code> file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-groovy" data-lang="groovy"><span class="n">android</span>  <span class="o">{</span>  
+  <span class="n">testOptions</span>  <span class="o">{</span>  
+    <span class="n">unitTests</span>  <span class="o">{</span>  
+      <span class="n">includeAndroidResources</span>  <span class="o">=</span>  <span class="kc">true</span>  
+    <span class="o">}</span>  
+  <span class="o">}</span>  
+<span class="o">}</span>  
+
+<span class="n">dependencies</span>  <span class="o">{</span>
+  <span class="n">testImplementation</span> <span class="s1">&#39;org.robolectric:robolectric:4.3&#39;</span>
+<span class="o">}</span></code></pre></div>
+<p>And annotate your test with the Robolectric test runner:</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.robolectric.RobolectricTestRunner</span>
+
+<span class="n">@RunWith</span><span class="p">(</span><span class="n">RobolectricTestRunner</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>  
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SandwichTest</span> <span class="p">{</span>
+<span class="p">}</span></code></pre></div>
+<p>We want to test the following class. It represents the device and exposes two methods: <code>ìsInAirplaneMode</code> and <code>ìsWithLowBattery</code>. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">android.content.Context</span>
+<span class="k">import</span> <span class="nn">android.provider.Settings</span>
+<span class="k">import</span> <span class="nn">android.provider.Settings.Global.AIRPLANE_MODE_ON</span>
+<span class="k">import</span> <span class="nn">android.os.BatteryManager</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Device</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>  
+      
+  <span class="k">fun</span> <span class="nf">isInAirplaneMode</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="n">Settings</span><span class="p">.</span><span class="n">System</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">contentResolver</span><span class="p">,</span> <span class="n">Settings</span><span class="p">.</span><span class="n">Global</span><span class="p">.</span><span class="n">AIRPLANE_MODE_ON</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="p">!=</span> <span class="m">0</span>
+  <span class="p">}</span>  
+
+  <span class="k">fun</span> <span class="nf">isWithLowBattery</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>  
+    <span class="k">val</span> <span class="py">manager</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">BATTERY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">BatteryManager</span>  
+    <span class="k">val</span> <span class="py">level</span> <span class="p">=</span> <span class="n">manager</span><span class="p">.</span><span class="n">getIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">)</span>  
+    <span class="k">val</span> <span class="py">isCharging</span> <span class="p">=</span> <span class="n">manager</span><span class="p">.</span><span class="n">isCharging</span>
+    <span class="k">return</span> <span class="n">level</span> <span class="p">&lt;=</span> <span class="m">15</span> <span class="p">&amp;&amp;</span> <span class="p">!</span><span class="n">isCharging</span>  
+  <span class="p">}</span>  
+    
+<span class="p">}</span></code></pre></div>
+<h2 id="to-test-isinairplanemode-method">To test <code>isInAirplaneMode</code> method<a href="#to-test-isinairplanemode-method" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>We would have two tests to validate the two possible outcomes, both implemented in the code bloack below. Pay attention to the <code>ShadowSettings</code> class. It is a class provided by Robolectric and it belogs to this collection of classes called &ldquo;Sadow&rdquo; classes. Instances of these classes are created along the real Android system classes to allow you to manipulate their behaviour. Such as in this test case where we call <code>ShadowSettings.setAirplaneMode</code> to set if either true or false would be returned from the <code>Settings.System.getInt</code> call in our <code>Device</code> class to check if Airplane is enabled or not.</p>
+
+<p>We can figure it out if an Android class has a Shadow available in Robolectric by prepending &ldquo;Shadow&rdquo; to the name of the class. We can use the <a href="http://robolectric.org/javadoc/4.3/">Robolectric API docs</a> to see if such a class exists or not by typing its name in the search box at the top of the page. If it does not exists, we would have to implement it ourselves, which is not complicated.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.robolectric.shadows.ShadowSettings</span>
+<span class="k">import</span> <span class="nn">org.junit.Before</span>  
+<span class="k">import</span> <span class="nn">org.junit.Test</span>
+<span class="k">import</span> <span class="nn">org.robolectric.RuntimeEnvironment</span>
+
+<span class="n">@Before</span>  
+<span class="k">fun</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="k">val</span> <span class="py">context</span> <span class="p">=</span> <span class="n">RuntimeEnvironment</span><span class="p">.</span><span class="n">application</span>  
+  <span class="n">device</span> <span class="p">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isInAirplaneMode_returnsTrueIfAirplaneIsEnabled</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device is with airplane on  
+</span><span class="c1"></span>  <span class="n">ShadowSettings</span><span class="p">.</span><span class="n">setAirplaneMode</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isAirplaneOn</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isInAirplaneMode</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be true  
+</span><span class="c1"></span>  <span class="n">assertTrue</span><span class="p">(</span><span class="n">isAirplaneOn</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isInAirplaneMode_returnsFalseIfAirplaneIsDisabled</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device is with airplane off  
+</span><span class="c1"></span>  <span class="n">ShadowSettings</span><span class="p">.</span><span class="n">setAirplaneMode</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isAirplaneOn</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isInAirplaneMode</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be false  
+</span><span class="c1"></span>  <span class="n">assertFalse</span><span class="p">(</span><span class="n">isAirplaneOn</span><span class="p">)</span>  
+<span class="p">}</span></code></pre></div>
+<h2 id="to-test-iswithlowbattery-method">To test <code>isWithLowBattery</code> method<a href="#to-test-iswithlowbattery-method" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>Same thing here, two tests will be necessary. The difference is in the <code>setUp</code> method. Since we we are dealing with a non-static method, we have to get the reference to the shadow object that we need to manipulate. Inside of <code>Device</code> class we get the instance of <code>BatteryManager</code> by calling <code>context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager</code>. We will do the same, but we will pass the reference to the Robolectric method called <code>Shadows.shadowOf</code>. As said before, each object has a corresponding shadow, so to get it we need the object reference and a call to <code>Shadows.shadowOf</code>. It works like a key-value map, where the reference is the key.</p>
+
+<p>After getting the reference, we can manipulate it by calling the methods that it provided. In this case I need to control the level of the battery and if either the device is charging or not.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.junit.Before</span>  
+<span class="k">import</span> <span class="nn">org.junit.Test</span>
+<span class="k">import</span> <span class="nn">org.robolectric.RuntimeEnvironment</span>
+<span class="k">import</span> <span class="nn">org.robolectric.shadows.ShadowBatteryManager</span>
+<span class="k">import</span> <span class="nn">android.os.BatteryManager</span>
+
+<span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">device</span><span class="p">:</span> <span class="n">Device</span>  
+<span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">batteryManager</span><span class="p">:</span> <span class="n">ShadowBatteryManager</span>  
+  
+<span class="n">@Before</span>  
+<span class="k">fun</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="k">val</span> <span class="py">context</span> <span class="p">=</span> <span class="n">RuntimeEnvironment</span><span class="p">.</span><span class="n">application</span>  
+  <span class="n">device</span> <span class="p">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  
+  <span class="n">batteryManager</span> <span class="p">=</span> <span class="n">Shadows</span><span class="p">.</span><span class="n">shadowOf</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">BATTERY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">BatteryManager</span><span class="p">)</span>  
+<span class="p">}</span>
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isWithLowBattery_returnsTrueIfDeviceIsWithLowBatteryAndNotCharging</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device has 10% of battery and it is not charging  
+</span><span class="c1"></span>  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>  
+  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIsCharging</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isLowBattery</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isWithLowBattery</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be true  
+</span><span class="c1"></span>  <span class="n">assertTrue</span><span class="p">(</span><span class="n">isLowBattery</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isWithLowBattery_returnsFalseIfDeviceIsWithBatteryAndIsCharging</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device has 90% of battery and it is charging  
+</span><span class="c1"></span>  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">,</span> <span class="m">90</span><span class="p">)</span>  
+  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIsCharging</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isLowBattery</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isWithLowBattery</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be false  
+</span><span class="c1"></span>  <span class="n">assertFalse</span><span class="p">(</span><span class="n">isLowBattery</span><span class="p">)</span>  
+<span class="p">}</span></code></pre></div>
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>This is the basic gist of Robolectric. Instead of using <code>mocks</code>, we use <code>fakes</code> to test out code that depends on Android. Robolectric provides a ton of shadows for various Android classes. But if there is a class that do not has a shadow, <a href="https://himbeer.farm/2018/11/custom-shadows/">you can easily implement a shadow for it</a>.</p>
+
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="//artenesbok.com/tags/android">android</a></span><span class="tag"><a href="//artenesbok.com/tags/test">test</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>686 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-06-24 21:01 -0400</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Configuring Amazon Aws S3 to Store Images for Your Website</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="//artenesbok.com/">Artenes Nogueira</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="//artenesbok.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+	<script src="//artenesbok.com/js/main.min.35ccbf1cdceb91e4c64c06b5d009d6e2977fafe56beda7762febd4e67528d2ac.js" integrity="sha256-Ncy/HNzrkeTGTAa10AnW4pd/r+Vr7ad2L+vU5nUo0qw="></script>
+
+</body>
+
+</html>

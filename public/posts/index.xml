@@ -1,0 +1,475 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Artenes&#39; BOK</title>
+		<link>//artenesbok.com/posts/</link>
+		<description>Recent content in Posts on Artenes&#39; BOK</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>en-Us</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Wed, 05 Feb 2020 18:46:07 -0400</lastBuildDate>
+		<atom:link href="//artenesbok.com/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Using Data Binding on android</title>
+			<link>//artenesbok.com/posts/using_databinding_on_android/</link>
+			<pubDate>Wed, 05 Feb 2020 18:46:07 -0400</pubDate>
+			
+			<guid>//artenesbok.com/posts/using_databinding_on_android/</guid>
+			<description>Let&amp;rsquo;s use data binding in an Android application.
+1.Enabling data binding in your build.gradle file.
+android { dataBinding { enabled = true } } 2.Using data binding in your xml layout file.
+ Wrap it with the &amp;lt;layout&amp;gt; tag. Use the &amp;lt;data&amp;gt; tag to decalre the variables used in this layout.  &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt; &amp;lt;layout xmlns:android=&amp;#34;http://schemas.android.com/apk/res/android&amp;#34; xmlns:app=&amp;#34;http://schemas.android.com/apk/res-auto&amp;#34;&amp;gt; &amp;lt;data&amp;gt; &amp;lt;!-- We are using ViewMode here as an example, but it can be any data type --&amp;gt; &amp;lt;variable name=&amp;#34;viewModel&amp;#34; type=&amp;#34;package.</description>
+			<content type="html"><![CDATA[<p>Let&rsquo;s use <a href="https://developer.android.com/topic/libraries/data-binding?hl=pt-br">data binding</a> in an Android application.</p>
+
+<p>1.Enabling data binding in your build.gradle file.</p>
+<div class="highlight"><pre class="chroma"><code class="language-groovy" data-lang="groovy"><span class="n">android</span> <span class="o">{</span>
+  <span class="n">dataBinding</span> <span class="o">{</span>
+    <span class="n">enabled</span> <span class="o">=</span> <span class="kc">true</span>
+  <span class="o">}</span>
+<span class="o">}</span></code></pre></div>
+<p>2.Using data binding in your xml layout file.</p>
+
+<ul>
+<li>Wrap it with the <code>&lt;layout&gt;</code> tag.</li>
+<li>Use the <code>&lt;data&gt;</code> tag to decalre the variables used in this layout.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;</span>
+<span class="nt">&lt;layout</span> <span class="na">xmlns:android=</span><span class="s">&#34;http://schemas.android.com/apk/res/android&#34;</span>
+    <span class="na">xmlns:app=</span><span class="s">&#34;http://schemas.android.com/apk/res-auto&#34;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;data&gt;</span>
+        <span class="c">&lt;!-- We are using ViewMode here as an example, but it can be any data type --&gt;</span>
+        <span class="nt">&lt;variable</span>
+            <span class="na">name=</span><span class="s">&#34;viewModel&#34;</span>
+            <span class="na">type=</span><span class="s">&#34;package.MyViewModel&#34;</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/data&gt;</span>
+
+    <span class="c">&lt;!-- Your layout here --&gt;</span>
+
+<span class="nt">&lt;/layout&gt;</span></code></pre></div>
+<p>3.Inflating the layout in your Activity.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">androidx.appcompat.app.AppCompatActivity</span>
+
+<span class="k">class</span> <span class="nc">AccountViewActivity</span> <span class="p">:</span> <span class="n">AppCompatActivity</span><span class="p">()</span> <span class="p">{</span> 
+
+  <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+
+    <span class="k">val</span> <span class="py">viewModel</span> <span class="p">=</span> <span class="n">ViewModelProviders</span><span class="p">.</span><span class="n">of</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">factory</span><span class="p">).</span><span class="k">get</span><span class="p">(</span><span class="n">MyViewModel</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">)</span>
+
+    <span class="k">val</span> <span class="py">binding</span> <span class="p">=</span> <span class="n">DataBindingUtil</span><span class="p">.</span><span class="n">setContentView</span><span class="p">&lt;</span><span class="n">ActivityAccountViewBinding</span><span class="p">&gt;(</span><span class="k">this</span><span class="p">,</span><span class="n">R</span><span class="p">.</span><span class="n">layout</span><span class="p">.</span><span class="n">my_view</span><span class="p">)</span>
+    <span class="n">binding</span><span class="p">.</span><span class="n">lifecycleOwner</span> <span class="p">=</span> <span class="k">this</span> <span class="c1">//this is to use LiveData
+</span><span class="c1"></span>    <span class="n">binding</span><span class="p">.</span><span class="n">viewModel</span> <span class="p">=</span> <span class="n">viewModel</span>
+  <span class="p">}</span>
+
+<span class="p">}</span></code></pre></div>
+<p>4.Exposing data from your ViewModel to the View.</p>
+
+<p>You have to make your data <code>MutableLiveDatas</code> so the data binding library can write and read data from/to it.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">class</span> <span class="nc">MyViewModel</span><span class="p">()</span> <span class="p">:</span> <span class="n">ViewModel</span><span class="p">()</span> <span class="p">{</span>
+
+  <span class="c1">//it can be of any type
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">myData</span> <span class="p">=</span> <span class="n">MutableLiveData</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;()</span>
+
+<span class="p">}</span></code></pre></div>
+<p>5.Binding data from your ViewModel to the View.</p>
+
+<p>Pay attention to use <code>@={}</code> to bind the data in the view.</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;com.google.android.material.textfield.TextInputEditText</span>
+    <span class="na">android:id=</span><span class="s">&#34;@+id/textInputName&#34;</span>
+    <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+    <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+    <span class="na">android:text=</span><span class="s">&#34;@={viewModel.data}&#34;</span> <span class="nt">/&gt;</span></code></pre></div>
+<p>6.Binding data to a custom view.</p>
+
+<p>Data binding does not know how to bind data to custom views, so you have to tell it through <code>BidingAdapters</code>.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">androidx.databinding.BindingAdapter</span>
+<span class="k">import</span> <span class="nn">androidx.databinding.InverseBindingAdapter</span>
+<span class="k">import</span> <span class="nn">androidx.databinding.InverseBindingListener</span>
+
+<span class="k">object</span> <span class="nc">Bindings</span> <span class="p">{</span>
+
+    <span class="c1">//this method tells how to set the value in the custom view
+</span><span class="c1"></span>    <span class="c1">//this myCustomProperty can be any name
+</span><span class="c1"></span>    <span class="c1">//the method also can be any name
+</span><span class="c1"></span>    <span class="c1">//data binding will find any method with this annotation
+</span><span class="c1"></span>    <span class="n">@BindingAdapter</span><span class="p">(</span><span class="s">&#34;myCustomProperty&#34;</span><span class="p">)</span>
+    <span class="n">@JvmStatic</span>
+    <span class="k">fun</span> <span class="nf">setValue</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">MyCustomView</span><span class="p">,</span> <span class="n">newValue</span><span class="p">:</span> <span class="n">String</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="c1">//this is to avoid infinite loops
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">value</span> <span class="p">!=</span> <span class="n">newValue</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">view</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">newValue</span> <span class="o">?:</span> <span class="s">&#34;&#34;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">//this method tells how to fetch data from the custom view
+</span><span class="c1"></span>    <span class="n">@InverseBindingAdapter</span><span class="p">(</span><span class="n">attribute</span> <span class="p">=</span> <span class="s">&#34;myCustomProperty&#34;</span><span class="p">)</span>
+    <span class="n">@JvmStatic</span>
+    <span class="k">fun</span> <span class="nf">getValue</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">MyCystomView</span><span class="p">):</span> <span class="n">String</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">view</span><span class="p">.</span><span class="n">value</span>
+    <span class="p">}</span>
+
+    <span class="c1">//this is a standard, you need to take the name and add the sufix PropertyAttrChanged
+</span><span class="c1"></span>    <span class="c1">//this is how we tell when the data changes in behalve of the user
+</span><span class="c1"></span>    <span class="n">@BindingAdapter</span><span class="p">(</span><span class="s">&#34;app:myCustomPropertyAttrChanged&#34;</span><span class="p">)</span>
+    <span class="n">@JvmStatic</span>
+    <span class="k">fun</span> <span class="nf">setListener</span><span class="p">(</span><span class="n">view</span><span class="p">:</span> <span class="n">CustomView</span><span class="p">,</span> <span class="n">attrChange</span><span class="p">:</span> <span class="n">InverseBindingListener</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//you create this listener
+</span><span class="c1"></span>        <span class="n">view</span><span class="p">.</span><span class="n">listener</span> <span class="p">=</span> <span class="k">object</span><span class="p">:</span><span class="n">MyCustomView</span><span class="p">.</span><span class="n">OnValueChangeListener</span> <span class="p">{</span>
+            <span class="k">override</span> <span class="k">fun</span> <span class="nf">onValueChanged</span><span class="p">(</span><span class="n">newValue</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">attrChange</span><span class="p">.</span><span class="n">onChange</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<span class="p">}</span></code></pre></div>
+<p>7.Adding onClick event in buttons with data binding</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="nt">&lt;Button</span>
+  <span class="na">android:id=</span><span class="s">&#34;@+id/buttonSave&#34;</span>
+  <span class="na">android:layout_width=</span><span class="s">&#34;match_parent&#34;</span>
+  <span class="na">android:layout_height=</span><span class="s">&#34;wrap_content&#34;</span>
+  <span class="na">android:text=</span><span class="s">&#34;@string/save&#34;</span>
+  <span class="na">android:onClick=</span><span class="s">&#34;@{() -&gt; viewModel.save()}&#34;</span><span class="nt">/&gt;</span></code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Why Not Use Heroku for Your Ghost Blog</title>
+			<link>//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</link>
+			<pubDate>Wed, 26 Jun 2019 21:18:08 -0400</pubDate>
+			
+			<guid>//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</guid>
+			<description>I tried to set up a personal blog for free using Heroku and Ghost. After some time trying to setup this, I&amp;rsquo;ve come to the conclusion that this really does not works as planned. The main problem is how Heroku works for our basic use case of a blog.
+How Heroku works For our needs to host a blog, Heroku is just a service where you can host your website files.</description>
+			<content type="html"><![CDATA[
+
+<p>I tried to set up a personal blog for free using <a href="https://heroku.com">Heroku</a> and <a href="https://ghost.org">Ghost</a>. After some time trying to setup this, I&rsquo;ve come to the conclusion that this really does not works as planned. The main problem is how Heroku works for our basic use case of a blog.</p>
+
+<h2 id="how-heroku-works">How Heroku works</h2>
+
+<p>For our needs to host a blog, Heroku is just a service where you can host your website files. It follows these steps to serve your website:</p>
+
+<ul>
+<li>Right off the bat, your files will not be available to access.</li>
+<li>When someone access your website&rsquo;s url, Heroku will create a Dyno instance for your website.</li>
+<li>A Dyno instance means that your website will be built somewhere to become available to access.</li>
+<li>The build process can take a long time if your website is a more complex web app such as the case of Ghost that is a Node.js app.</li>
+<li>So when the first user hits the app, he will have to wait about 10 seconds to get any response. The following ones will not have to wait.</li>
+<li>After some time not being used, the Dyno will be destroyed.</li>
+<li>When this happens, any file uploaded to that Dyno will be destroyed and when someone tries to access it again, it will have to rebuild your site once again.</li>
+<li>Databases do not follow this rule. Anything that was saved in these will be kept.</li>
+</ul>
+
+<p>None of these points are a problem. This is just how the service works. And this is a good thing since they charge for the time that your Dyno stays alive. They offer a free tier plan where you can have up to 1000 hours per month of time consumed by a Dyno.</p>
+
+<h2 id="how-to-surpass-heroku-s-ways">How to surpass Heroku&rsquo;s ways</h2>
+
+<p>Since Heroku destroys everything when it does not need it anymore, how to keep images that I&rsquo;ve uploaded to my blog? Just save them somewhere else. Our bloging plataform in question (Ghost), provides some 3rd party libraries that allow us to save an image through its UI to somewhere else. Unfortunately, the most common ones does not work properly.</p>
+
+<p>Ghost call these libraries <a href="https://docs.ghost.org/concepts/storage-adapters/">storage adapters</a>. The following ones rouse my interest:</p>
+
+<ul>
+<li><a href="https://github.com/spanishdict/ghost-s3-compat">S3</a></li>
+<li><a href="https://github.com/robincsamuel/ghost-google-drive">Google Drive</a></li>
+<li><a href="https://github.com/wrenth04/ghost-imgur">Imgur</a></li>
+<li><a href="https://github.com/ifvictr/ghost-github">Github</a></li>
+<li><a href="https://github.com/zce/pages-store">Github Pages or Gitlabe Pages</a></li>
+</ul>
+
+<p>These are services that I was used to use, but most of these libraries do not work as expected or the services in question do not provide what we need.</p>
+
+<p>For Google Drive and Github cases, the libraries just did not work. For the Github library, the author said that <a href="https://github.com/ifvictr/ghost-github/issues/11">it has some bugs that needs fixing for the latest version of Ghost</a>. The Google Drive one was just throwing an exception whenever I tried to upload an image. The Imgur one was kinda half-baked, it just uploaded the images as an anonymous, so in the end you would not have a nice collection with all your images somewhere to check.</p>
+
+<p>The ones that worked where the S3 and Github Pages or Gitlab Pages. The S3 one worked flawless. The only downside is that S3 is a paid service. You can uses its storage service for 12 months, but after that you pay or lose access. Since I wanted a free solution, this was not an option. The other one also worked very well, but then came Github and Gitlab to bite me back. Github pages where giving me random 404s for the images I uploaded. Sometimes I could access an image, others don&rsquo;t. And for Gitlab the images just took some time to become available, something around 5 minutes. In this case Gitlab was a good solution, but since S3 show me that it would be nice to use a service where I could upload and have the image available instantly I decided to keep looking further for something else.</p>
+
+<p>But I didn&rsquo;t. There is actually a last option that seems pretty similar to S3 and it is free: <a href="https://cloud.google.com/storage/">Google Cloud Storage</a>. There is also a <a href="https://github.com/thombuchi/ghost-google-cloud-storage">storage adapter for it</a>. In this case Gitlab would be the solution if the Google Cloud Storage does not work very well with this.</p>
+
+<p>In the end this solves only part of the problem. Images are ok, but themes files are not. Ghost does not uses these storage adapters to save themes files. So when you upload a nice theme you found somewhere, Heroku will just wipe out later to turn your webiste in just a mess of text without style. This problem makes Heroku not a good option for a dynamic blog that needs a backend such as Ghost or even Wordpress. Only if these CMS provided a way to save all the files to an external storage.</p>
+
+<h2 id="why-heroku-in-the-first-place">Why Heroku in the first place?</h2>
+
+<p>Because of the <a href="https://github.com/cobyism/ghost-on-heroku">one click deploy button</a>. You just click and you have your website. This link evens shows how to setup S3 to use along with it. But unfortunately this does not covers everything. Alos I knew about Heroku for some time, so I just thought that was worth the shot.</p>
+
+<h2 id="why-ghost">Why Ghost?</h2>
+
+<p>In relation with Wordpress, that it is a very popular CMS, Ghost is more simple, elegant and have a nice post editor, perfect for someone that just want to access your blog from anywhere and start typing something.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Dropped the idea and went for a static blog with <a href="https://gohugo.io/">Hugo</a>. Now I have to write the posts in a text editor using markdown instead of a WYSIWYG editor, but that works just fine. Now I do not have problems with images or other things, just commit the contents to my github repository and waits some minutes to go live. So, do not try to put a CMS or any simple web app that needs a backed in a service like Heroku. It was not made for this kinda of thing. Not for a free tier at least.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Configuring Amazon Aws S3 to Store Images for Your Website</title>
+			<link>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</link>
+			<pubDate>Tue, 25 Jun 2019 19:12:55 -0400</pubDate>
+			
+			<guid>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</guid>
+			<description>Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3.</description>
+			<content type="html"><![CDATA[
+
+<h2 id="before-starting">Before starting</h2>
+
+<ul>
+<li>Have an AWS (Amazon Web Services) account (<a href="https://portal.aws.amazon.com/billing/signup#/start">create one here</a>).</li>
+</ul>
+
+<h2 id="things-to-note">Things to note</h2>
+
+<ul>
+<li>S3 (Simple Storage Service) is a paid service offered by Amazon.</li>
+<li>S3 is used to store any kind of data (images, videos, music and such).</li>
+<li>S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. <strong>There is not forver free plan for S3</strong>.</li>
+<li>You can use an API to store the files or you can mannually do it by the S3 console in AWS&rsquo; website.</li>
+</ul>
+
+<h2 id="creating-an-aws-user-for-your-website">Creating an AWS user for your website</h2>
+
+<p>I am assuming that you will use some kind of CMS or website that already knows how to save and get images from S3. If that&rsquo;s the case, then you need to create an user in your AWS account for this website to be able to do this. <strong>If you plan to just upload the images mannualy to S3 then you do not need any more users, so you can skip this step</strong>.</p>
+
+<ul>
+<li><a href="https://console.aws.amazon.com/iam/home">Access the IAM (Identity and Access Management) console</a>.</li>
+<li>Click in the &ldquo;Add user&rdquo; blue button.</li>
+<li>In the &ldquo;User name&rdquo; field give a name for the user of your website (e.g. MyWebsite).</li>
+<li>In the &ldquo;Access Type&rdquo; field, mark the &ldquo;Programmatic access&rdquo; checkbox.</li>
+<li>Click in the &ldquo;Next: Permissions&rdquo; blue button.</li>
+<li>Click in &ldquo;Attach existing policies directly&rdquo; option.</li>
+<li>In the search field search for &ldquo;S3&rdquo; (without the quotation marks).</li>
+<li>In the list of results click in the checkbox right before the &ldquo;AmazonS3FullAccess&rdquo; result.</li>
+<li>Click in the &ldquo;Next: Tags&rdquo; blue button.</li>
+<li>Click in the &ldquo;Next: Review&rdquo; blue button.</li>
+<li>Click in the &ldquo;Create user&rdquo; blue button.</li>
+<li>Click in the &ldquo;Dowload .csv&rdquo; button to dowload the data for your website user. &ldquo;Access key ID&rdquo; and &ldquo;Secret access key&rdquo; will be useful for your website to access your bucket programmatically.</li>
+<li>Click the &ldquo;Close&rdquo; button at the bottom right.</li>
+<li>Click in the name of the user you created in the list of users.</li>
+<li>Copy and paste the &ldquo;User ARN&rdquo; field&rsquo;s value to a text file. We will use this later.</li>
+</ul>
+
+<h2 id="creating-a-bucket">Creating a bucket</h2>
+
+<p>A bucket is just like a folder in your machine, a place to put files and more folders.</p>
+
+<ul>
+<li><a href="https://s3.console.aws.amazon.com/s3/home">Access your S3 console</a>.</li>
+<li>Click in the blue button &ldquo;Create bucket&rdquo;.</li>
+<li>Fill the field &ldquo;Bucket name&rdquo; with a name that makes sense for your bucket (e.g. myveryuniquewebsite).</li>
+<li>In the &ldquo;Region&rdquo; field, select a region that is closest to your region (e.g. US East (Ohio)).</li>
+<li>Click Create at the bottom left.</li>
+</ul>
+
+<h2 id="disabling-blocking-of-public-bucket-policies">Disabling blocking of public bucket policies</h2>
+
+<p>By default, S3 blocks any access to any of the files you upload to your buckets. We have to mannualy tell it to not block everything since our contents will be accessible by anyone in the web.</p>
+
+<ul>
+<li>Click in your bucket&rsquo;s name in the list of buckets.</li>
+<li>Click in the &ldquo;Permissions&rdquo; tab.</li>
+<li>Click in the &ldquo;Edit&rdquo; button at the right end of the &ldquo;Block all public access&rdquo; rectangle.</li>
+<li>Uncheck the first checkbox and check next two checkboxes, leaving the last two unchecked.</li>
+<li>Click in the blue &ldquo;Save&rdquo; button at the top right corner of the rectangle.</li>
+<li>A pop up will appear. Type the word &ldquo;confirm&rdquo; in the text field and hit the &ldquo;Confirm&rdquo; button.</li>
+</ul>
+
+<h2 id="defining-bucket-policies">Defining Bucket Policies</h2>
+
+<p>In the previous step we&rsquo;ve opened the access to our bucket. But now we have to strict it again so not anyone can try to upload files to our bucket. For this we will use Bucket Policies that makes use of its own language to describe for who we want give access to perform a certain operation in our bucket. In this case we want: 1. Let everyone see all the content in our bucket; 2. Only allow me and my website to put content in the bucket.</p>
+
+<ul>
+<li>While in the permissions tab of your bucket, click in the &ldquo;Bucket Policy&rdquo; sub-tab.</li>
+<li>Paste the following piece of Bucket Policy in the text field.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Id&#34;</span><span class="p">:</span> <span class="s2">&#34;Policy1561128789667&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;AllowWebsite&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&#34;AWS&#34;</span><span class="p">:</span> <span class="s2">&#34;PUT_YOUR_USER_HERE&#34;</span>
+            <span class="p">},</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;s3:ListBucket&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:DeleteObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:PutObject&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;PUT_YOUR_BUCKET_HERE&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;PUT_YOUR_BUCKET_HERE/*&#34;</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;AllowViewer&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;PUT_YOUR_BUCKET_HERE/*&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Replace <code>PUT_YOUR_BUCKET_HERE</code> with the ARN (Amazon Resource Name) for your bucket. Just look for the value at the right of the title &ldquo;Bucket policy editor&rdquo; (e.g. arn:aws:s3:::myspecialuniquebucket). Pay attention to not delete the <code>/*</code> at the end of some of these.</li>
+<li>Replace <code>PUT_YOUR_USER_HERE</code> with the ARN of the user of your website. We already got this value in the first step, if you didn&rsquo;t, go back to the <a href="https://console.aws.amazon.com/iam/home">IAM console</a> and get it (e.g. arn:aws:iam::388742887624:user/MyWebsite).</li>
+<li>Click in the blue &ldquo;Save&rdquo; button at the right top corner of where you pasted the code above.</li>
+<li>You will see a warning that &ldquo;This bucket has public access&rdquo;. This is not a problem because that&rsquo;s out intention. The content here needs to be accessible to anyone. Just the upload needs to be restricted.</li>
+</ul>
+
+<p>An explanation about the policy file above if you are interested. This file is telling S3 that we have two <code>Statement</code>. One called <code>AllowWebSite</code> and other <code>AllowViewer</code>.</p>
+
+<p>The <code>AllowWebiste</code> has an <code>Effect</code> to <code>Allow</code> our user (<code>Principal</code>) to perform a set of <code>Action</code> in the buckets with the names under <code>Resource</code>. We have two here because for some actions we need to define that it needs to happen either on the whole bucket or just in the items inside the bucket (not the bucket itself).</p>
+
+<p>The <code>AllowViewer</code> has an <code>Effect</code> to <code>Allow</code> any user (<code>*</code>) to perform the <code>Action</code> to view any file stored in our bucket with the name under <code>Resource</code>.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Now you can upload files directly in the S3 panel or give the &ldquo;Access key ID&rdquo; and &ldquo;Secret access key&rdquo; to your website so you can upload images through it (supposing your website already knows how to do this and you do not need to implement it yourself).</p>
+
+<h2 id="context">Context</h2>
+
+<p>I was trying to put a <a href="https://ghost.org/">Ghost</a> blog in <a href="https://heroku.com/">Heroku</a>. Since it does not support file storage I&rsquo;ve decided to use S3. I found that it is very complicated to get the idea of the policies. But once done, you do not have to worry about it.</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Using Robolectric for Unit Tests in Android</title>
+			<link>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</link>
+			<pubDate>Mon, 24 Jun 2019 21:01:34 -0400</pubDate>
+			
+			<guid>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</guid>
+			<description>To start, add the following to your build.gradle file:
+android { testOptions { unitTests { includeAndroidResources = true } } } dependencies { testImplementation &amp;#39;org.robolectric:robolectric:4.3&amp;#39; } And annotate your test with the Robolectric test runner:
+import org.robolectric.RobolectricTestRunner @RunWith(RobolectricTestRunner::class) public class SandwichTest { } We want to test the following class. It represents the device and exposes two methods: ìsInAirplaneMode and ìsWithLowBattery. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.</description>
+			<content type="html"><![CDATA[
+
+<p>To start, add the following to your <code>build.gradle</code> file:</p>
+<div class="highlight"><pre class="chroma"><code class="language-groovy" data-lang="groovy"><span class="n">android</span>  <span class="o">{</span>  
+  <span class="n">testOptions</span>  <span class="o">{</span>  
+    <span class="n">unitTests</span>  <span class="o">{</span>  
+      <span class="n">includeAndroidResources</span>  <span class="o">=</span>  <span class="kc">true</span>  
+    <span class="o">}</span>  
+  <span class="o">}</span>  
+<span class="o">}</span>  
+
+<span class="n">dependencies</span>  <span class="o">{</span>
+  <span class="n">testImplementation</span> <span class="s1">&#39;org.robolectric:robolectric:4.3&#39;</span>
+<span class="o">}</span></code></pre></div>
+<p>And annotate your test with the Robolectric test runner:</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.robolectric.RobolectricTestRunner</span>
+
+<span class="n">@RunWith</span><span class="p">(</span><span class="n">RobolectricTestRunner</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>  
+<span class="k">public</span> <span class="k">class</span> <span class="nc">SandwichTest</span> <span class="p">{</span>
+<span class="p">}</span></code></pre></div>
+<p>We want to test the following class. It represents the device and exposes two methods: <code>ìsInAirplaneMode</code> and <code>ìsWithLowBattery</code>. Both of them make use of the Android framework to check if the device is with Airplane mode enabled or if it has enough battery.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">android.content.Context</span>
+<span class="k">import</span> <span class="nn">android.provider.Settings</span>
+<span class="k">import</span> <span class="nn">android.provider.Settings.Global.AIRPLANE_MODE_ON</span>
+<span class="k">import</span> <span class="nn">android.os.BatteryManager</span>
+
+<span class="k">public</span> <span class="k">class</span> <span class="nc">Device</span><span class="p">(</span><span class="k">private</span> <span class="k">val</span> <span class="py">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">{</span>  
+      
+  <span class="k">fun</span> <span class="nf">isInAirplaneMode</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>  
+    <span class="k">return</span> <span class="n">Settings</span><span class="p">.</span><span class="n">System</span><span class="p">.</span><span class="n">getInt</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">contentResolver</span><span class="p">,</span> <span class="n">Settings</span><span class="p">.</span><span class="n">Global</span><span class="p">.</span><span class="n">AIRPLANE_MODE_ON</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="p">!=</span> <span class="m">0</span>
+  <span class="p">}</span>  
+
+  <span class="k">fun</span> <span class="nf">isWithLowBattery</span><span class="p">():</span> <span class="n">Boolean</span> <span class="p">{</span>  
+    <span class="k">val</span> <span class="py">manager</span> <span class="p">=</span> <span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">BATTERY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">BatteryManager</span>  
+    <span class="k">val</span> <span class="py">level</span> <span class="p">=</span> <span class="n">manager</span><span class="p">.</span><span class="n">getIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">)</span>  
+    <span class="k">val</span> <span class="py">isCharging</span> <span class="p">=</span> <span class="n">manager</span><span class="p">.</span><span class="n">isCharging</span>
+    <span class="k">return</span> <span class="n">level</span> <span class="p">&lt;=</span> <span class="m">15</span> <span class="p">&amp;&amp;</span> <span class="p">!</span><span class="n">isCharging</span>  
+  <span class="p">}</span>  
+    
+<span class="p">}</span></code></pre></div>
+<h2 id="to-test-isinairplanemode-method">To test <code>isInAirplaneMode</code> method</h2>
+
+<p>We would have two tests to validate the two possible outcomes, both implemented in the code bloack below. Pay attention to the <code>ShadowSettings</code> class. It is a class provided by Robolectric and it belogs to this collection of classes called &ldquo;Sadow&rdquo; classes. Instances of these classes are created along the real Android system classes to allow you to manipulate their behaviour. Such as in this test case where we call <code>ShadowSettings.setAirplaneMode</code> to set if either true or false would be returned from the <code>Settings.System.getInt</code> call in our <code>Device</code> class to check if Airplane is enabled or not.</p>
+
+<p>We can figure it out if an Android class has a Shadow available in Robolectric by prepending &ldquo;Shadow&rdquo; to the name of the class. We can use the <a href="http://robolectric.org/javadoc/4.3/">Robolectric API docs</a> to see if such a class exists or not by typing its name in the search box at the top of the page. If it does not exists, we would have to implement it ourselves, which is not complicated.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.robolectric.shadows.ShadowSettings</span>
+<span class="k">import</span> <span class="nn">org.junit.Before</span>  
+<span class="k">import</span> <span class="nn">org.junit.Test</span>
+<span class="k">import</span> <span class="nn">org.robolectric.RuntimeEnvironment</span>
+
+<span class="n">@Before</span>  
+<span class="k">fun</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="k">val</span> <span class="py">context</span> <span class="p">=</span> <span class="n">RuntimeEnvironment</span><span class="p">.</span><span class="n">application</span>  
+  <span class="n">device</span> <span class="p">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isInAirplaneMode_returnsTrueIfAirplaneIsEnabled</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device is with airplane on  
+</span><span class="c1"></span>  <span class="n">ShadowSettings</span><span class="p">.</span><span class="n">setAirplaneMode</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isAirplaneOn</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isInAirplaneMode</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be true  
+</span><span class="c1"></span>  <span class="n">assertTrue</span><span class="p">(</span><span class="n">isAirplaneOn</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isInAirplaneMode_returnsFalseIfAirplaneIsDisabled</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device is with airplane off  
+</span><span class="c1"></span>  <span class="n">ShadowSettings</span><span class="p">.</span><span class="n">setAirplaneMode</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isAirplaneOn</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isInAirplaneMode</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be false  
+</span><span class="c1"></span>  <span class="n">assertFalse</span><span class="p">(</span><span class="n">isAirplaneOn</span><span class="p">)</span>  
+<span class="p">}</span></code></pre></div>
+<h2 id="to-test-iswithlowbattery-method">To test <code>isWithLowBattery</code> method</h2>
+
+<p>Same thing here, two tests will be necessary. The difference is in the <code>setUp</code> method. Since we we are dealing with a non-static method, we have to get the reference to the shadow object that we need to manipulate. Inside of <code>Device</code> class we get the instance of <code>BatteryManager</code> by calling <code>context.getSystemService(Context.BATTERY_SERVICE) as BatteryManager</code>. We will do the same, but we will pass the reference to the Robolectric method called <code>Shadows.shadowOf</code>. As said before, each object has a corresponding shadow, so to get it we need the object reference and a call to <code>Shadows.shadowOf</code>. It works like a key-value map, where the reference is the key.</p>
+
+<p>After getting the reference, we can manipulate it by calling the methods that it provided. In this case I need to control the level of the battery and if either the device is charging or not.</p>
+<div class="highlight"><pre class="chroma"><code class="language-kotlin" data-lang="kotlin"><span class="k">import</span> <span class="nn">org.junit.Before</span>  
+<span class="k">import</span> <span class="nn">org.junit.Test</span>
+<span class="k">import</span> <span class="nn">org.robolectric.RuntimeEnvironment</span>
+<span class="k">import</span> <span class="nn">org.robolectric.shadows.ShadowBatteryManager</span>
+<span class="k">import</span> <span class="nn">android.os.BatteryManager</span>
+
+<span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">device</span><span class="p">:</span> <span class="n">Device</span>  
+<span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">batteryManager</span><span class="p">:</span> <span class="n">ShadowBatteryManager</span>  
+  
+<span class="n">@Before</span>  
+<span class="k">fun</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="k">val</span> <span class="py">context</span> <span class="p">=</span> <span class="n">RuntimeEnvironment</span><span class="p">.</span><span class="n">application</span>  
+  <span class="n">device</span> <span class="p">=</span> <span class="n">Device</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>  
+  <span class="n">batteryManager</span> <span class="p">=</span> <span class="n">Shadows</span><span class="p">.</span><span class="n">shadowOf</span><span class="p">(</span><span class="n">context</span><span class="p">.</span><span class="n">getSystemService</span><span class="p">(</span><span class="n">Context</span><span class="p">.</span><span class="n">BATTERY_SERVICE</span><span class="p">)</span> <span class="k">as</span> <span class="n">BatteryManager</span><span class="p">)</span>  
+<span class="p">}</span>
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isWithLowBattery_returnsTrueIfDeviceIsWithLowBatteryAndNotCharging</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device has 10% of battery and it is not charging  
+</span><span class="c1"></span>  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">,</span> <span class="m">10</span><span class="p">)</span>  
+  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIsCharging</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isLowBattery</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isWithLowBattery</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be true  
+</span><span class="c1"></span>  <span class="n">assertTrue</span><span class="p">(</span><span class="n">isLowBattery</span><span class="p">)</span>  
+<span class="p">}</span>  
+  
+<span class="n">@Test</span>  
+<span class="k">fun</span> <span class="nf">isWithLowBattery_returnsFalseIfDeviceIsWithBatteryAndIsCharging</span><span class="p">()</span> <span class="p">{</span>  
+  <span class="c1">//given the device has 90% of battery and it is charging  
+</span><span class="c1"></span>  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIntProperty</span><span class="p">(</span><span class="n">BatteryManager</span><span class="p">.</span><span class="n">BATTERY_PROPERTY_CAPACITY</span><span class="p">,</span> <span class="m">90</span><span class="p">)</span>  
+  <span class="n">batteryManager</span><span class="p">.</span><span class="n">setIsCharging</span><span class="p">(</span><span class="k">true</span><span class="p">)</span>  
+
+  <span class="c1">//when I check it  
+</span><span class="c1"></span>  <span class="k">val</span> <span class="py">isLowBattery</span> <span class="p">=</span> <span class="n">device</span><span class="p">.</span><span class="n">isWithLowBattery</span><span class="p">()</span>  
+
+  <span class="c1">//then it should be false  
+</span><span class="c1"></span>  <span class="n">assertFalse</span><span class="p">(</span><span class="n">isLowBattery</span><span class="p">)</span>  
+<span class="p">}</span></code></pre></div>
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is the basic gist of Robolectric. Instead of using <code>mocks</code>, we use <code>fakes</code> to test out code that depends on Android. Robolectric provides a ton of shadows for various Android classes. But if there is a class that do not has a shadow, <a href="https://himbeer.farm/2018/11/custom-shadows/">you can easily implement a shadow for it</a>.</p>
+]]></content>
+		</item>
+		
+	</channel>
+</rss>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>//artenesbok.com/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/posts/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/posts/using_databinding_on_android/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/android/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/databinding/</loc>
+    <lastmod>2020-02-05T18:46:07-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/</loc>
+    <lastmod>2019-06-26T21:18:08-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/ghost/</loc>
+    <lastmod>2019-06-26T21:18:08-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/heroku/</loc>
+    <lastmod>2019-06-26T21:18:08-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/aws/</loc>
+    <lastmod>2019-06-25T19:12:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</loc>
+    <lastmod>2019-06-25T19:12:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/s3/</loc>
+    <lastmod>2019-06-25T19:12:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/</loc>
+    <lastmod>2019-06-24T21:01:34-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/tags/test/</loc>
+    <lastmod>2019-06-24T21:01:34-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//artenesbok.com/about/</loc>
+    <lastmod>2019-06-22T13:52:33-04:00</lastmod>
+  </url>
+  
+</urlset>

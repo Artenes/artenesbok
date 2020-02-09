@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AWS on Artenes&#39; BOK</title>
+    <link>//artenesbok.com/tags/aws/</link>
+    <description>Recent content in AWS on Artenes&#39; BOK</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-Us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 25 Jun 2019 19:12:55 -0400</lastBuildDate>
+    
+	<atom:link href="//artenesbok.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Configuring Amazon Aws S3 to Store Images for Your Website</title>
+      <link>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</link>
+      <pubDate>Tue, 25 Jun 2019 19:12:55 -0400</pubDate>
+      
+      <guid>//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/</guid>
+      <description>Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3.</description>
+    </item>
+    
+  </channel>
+</rss>

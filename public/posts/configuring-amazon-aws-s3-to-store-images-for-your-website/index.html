@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-Us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+
+<meta itemprop="name" content="Configuring Amazon Aws S3 to Store Images for Your Website">
+<meta itemprop="description" content="Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3.">
+
+
+<meta itemprop="datePublished" content="2019-06-25T19:12:55-04:00" />
+<meta itemprop="dateModified" content="2019-06-25T19:12:55-04:00" />
+<meta itemprop="wordCount" content="1037">
+
+
+
+<meta itemprop="keywords" content="AWS,S3," />
+<meta property="og:title" content="Configuring Amazon Aws S3 to Store Images for Your Website" />
+<meta property="og:description" content="Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//artenesbok.com/posts/configuring-amazon-aws-s3-to-store-images-for-your-website/" />
+<meta property="article:published_time" content="2019-06-25T19:12:55-04:00"/>
+<meta property="article:modified_time" content="2019-06-25T19:12:55-04:00"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Configuring Amazon Aws S3 to Store Images for Your Website"/>
+<meta name="twitter:description" content="Before starting  Have an AWS (Amazon Web Services) account (create one here).  Things to note  S3 (Simple Storage Service) is a paid service offered by Amazon. S3 is used to store any kind of data (images, videos, music and such). S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. There is not forver free plan for S3."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Configuring Amazon Aws S3 to Store Images for Your Website</title>
+	<link rel="stylesheet" href="//artenesbok.com/css/style.min.568c54a56780af2a70c45272522247710b69dbfc080b315211fb98381e3796f8.css" integrity="sha256-VoxUpWeArypwxFJyUiJHcQtp2/wICzFSEfuYOB43lvg=">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="//artenesbok.com/">Artenes&#39; BOK</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="//artenesbok.com/posts/">Posts</a>
+				<a href="//artenesbok.com/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="mailto:artenes.nogueira@gmail.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="https://github.com/Artenes" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="//artenesbok.com/posts/">Posts</a></li>
+			<li><a href="//artenesbok.com/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jun 25, 2019</span></div>
+				<h1>Configuring Amazon Aws S3 to Store Images for Your Website</h1>
+			</header>
+			<div class="content">
+				
+
+<h2 id="before-starting">Before starting<a href="#before-starting" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<ul>
+<li>Have an AWS (Amazon Web Services) account (<a href="https://portal.aws.amazon.com/billing/signup#/start">create one here</a>).</li>
+</ul>
+
+<h2 id="things-to-note">Things to note<a href="#things-to-note" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<ul>
+<li>S3 (Simple Storage Service) is a paid service offered by Amazon.</li>
+<li>S3 is used to store any kind of data (images, videos, music and such).</li>
+<li>S3 has a free tier where you can store up to 5GB of data for one year, after this you have to pay to keep access. <strong>There is not forver free plan for S3</strong>.</li>
+<li>You can use an API to store the files or you can mannually do it by the S3 console in AWS&rsquo; website.</li>
+</ul>
+
+<h2 id="creating-an-aws-user-for-your-website">Creating an AWS user for your website<a href="#creating-an-aws-user-for-your-website" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>I am assuming that you will use some kind of CMS or website that already knows how to save and get images from S3. If that&rsquo;s the case, then you need to create an user in your AWS account for this website to be able to do this. <strong>If you plan to just upload the images mannualy to S3 then you do not need any more users, so you can skip this step</strong>.</p>
+
+<ul>
+<li><a href="https://console.aws.amazon.com/iam/home">Access the IAM (Identity and Access Management) console</a>.</li>
+<li>Click in the &ldquo;Add user&rdquo; blue button.</li>
+<li>In the &ldquo;User name&rdquo; field give a name for the user of your website (e.g. MyWebsite).</li>
+<li>In the &ldquo;Access Type&rdquo; field, mark the &ldquo;Programmatic access&rdquo; checkbox.</li>
+<li>Click in the &ldquo;Next: Permissions&rdquo; blue button.</li>
+<li>Click in &ldquo;Attach existing policies directly&rdquo; option.</li>
+<li>In the search field search for &ldquo;S3&rdquo; (without the quotation marks).</li>
+<li>In the list of results click in the checkbox right before the &ldquo;AmazonS3FullAccess&rdquo; result.</li>
+<li>Click in the &ldquo;Next: Tags&rdquo; blue button.</li>
+<li>Click in the &ldquo;Next: Review&rdquo; blue button.</li>
+<li>Click in the &ldquo;Create user&rdquo; blue button.</li>
+<li>Click in the &ldquo;Dowload .csv&rdquo; button to dowload the data for your website user. &ldquo;Access key ID&rdquo; and &ldquo;Secret access key&rdquo; will be useful for your website to access your bucket programmatically.</li>
+<li>Click the &ldquo;Close&rdquo; button at the bottom right.</li>
+<li>Click in the name of the user you created in the list of users.</li>
+<li>Copy and paste the &ldquo;User ARN&rdquo; field&rsquo;s value to a text file. We will use this later.</li>
+</ul>
+
+<h2 id="creating-a-bucket">Creating a bucket<a href="#creating-a-bucket" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>A bucket is just like a folder in your machine, a place to put files and more folders.</p>
+
+<ul>
+<li><a href="https://s3.console.aws.amazon.com/s3/home">Access your S3 console</a>.</li>
+<li>Click in the blue button &ldquo;Create bucket&rdquo;.</li>
+<li>Fill the field &ldquo;Bucket name&rdquo; with a name that makes sense for your bucket (e.g. myveryuniquewebsite).</li>
+<li>In the &ldquo;Region&rdquo; field, select a region that is closest to your region (e.g. US East (Ohio)).</li>
+<li>Click Create at the bottom left.</li>
+</ul>
+
+<h2 id="disabling-blocking-of-public-bucket-policies">Disabling blocking of public bucket policies<a href="#disabling-blocking-of-public-bucket-policies" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>By default, S3 blocks any access to any of the files you upload to your buckets. We have to mannualy tell it to not block everything since our contents will be accessible by anyone in the web.</p>
+
+<ul>
+<li>Click in your bucket&rsquo;s name in the list of buckets.</li>
+<li>Click in the &ldquo;Permissions&rdquo; tab.</li>
+<li>Click in the &ldquo;Edit&rdquo; button at the right end of the &ldquo;Block all public access&rdquo; rectangle.</li>
+<li>Uncheck the first checkbox and check next two checkboxes, leaving the last two unchecked.</li>
+<li>Click in the blue &ldquo;Save&rdquo; button at the top right corner of the rectangle.</li>
+<li>A pop up will appear. Type the word &ldquo;confirm&rdquo; in the text field and hit the &ldquo;Confirm&rdquo; button.</li>
+</ul>
+
+<h2 id="defining-bucket-policies">Defining Bucket Policies<a href="#defining-bucket-policies" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>In the previous step we&rsquo;ve opened the access to our bucket. But now we have to strict it again so not anyone can try to upload files to our bucket. For this we will use Bucket Policies that makes use of its own language to describe for who we want give access to perform a certain operation in our bucket. In this case we want: 1. Let everyone see all the content in our bucket; 2. Only allow me and my website to put content in the bucket.</p>
+
+<ul>
+<li>While in the permissions tab of your bucket, click in the &ldquo;Bucket Policy&rdquo; sub-tab.</li>
+<li>Paste the following piece of Bucket Policy in the text field.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Id&#34;</span><span class="p">:</span> <span class="s2">&#34;Policy1561128789667&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;AllowWebsite&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&#34;AWS&#34;</span><span class="p">:</span> <span class="s2">&#34;PUT_YOUR_USER_HERE&#34;</span>
+            <span class="p">},</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;s3:ListBucket&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:DeleteObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:PutObject&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;PUT_YOUR_BUCKET_HERE&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;PUT_YOUR_BUCKET_HERE/*&#34;</span>
+            <span class="p">]</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;AllowViewer&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;PUT_YOUR_BUCKET_HERE/*&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
+<ul>
+<li>Replace <code>PUT_YOUR_BUCKET_HERE</code> with the ARN (Amazon Resource Name) for your bucket. Just look for the value at the right of the title &ldquo;Bucket policy editor&rdquo; (e.g. arn:aws:s3:::myspecialuniquebucket). Pay attention to not delete the <code>/*</code> at the end of some of these.</li>
+<li>Replace <code>PUT_YOUR_USER_HERE</code> with the ARN of the user of your website. We already got this value in the first step, if you didn&rsquo;t, go back to the <a href="https://console.aws.amazon.com/iam/home">IAM console</a> and get it (e.g. arn:aws:iam::388742887624:user/MyWebsite).</li>
+<li>Click in the blue &ldquo;Save&rdquo; button at the right top corner of where you pasted the code above.</li>
+<li>You will see a warning that &ldquo;This bucket has public access&rdquo;. This is not a problem because that&rsquo;s out intention. The content here needs to be accessible to anyone. Just the upload needs to be restricted.</li>
+</ul>
+
+<p>An explanation about the policy file above if you are interested. This file is telling S3 that we have two <code>Statement</code>. One called <code>AllowWebSite</code> and other <code>AllowViewer</code>.</p>
+
+<p>The <code>AllowWebiste</code> has an <code>Effect</code> to <code>Allow</code> our user (<code>Principal</code>) to perform a set of <code>Action</code> in the buckets with the names under <code>Resource</code>. We have two here because for some actions we need to define that it needs to happen either on the whole bucket or just in the items inside the bucket (not the bucket itself).</p>
+
+<p>The <code>AllowViewer</code> has an <code>Effect</code> to <code>Allow</code> any user (<code>*</code>) to perform the <code>Action</code> to view any file stored in our bucket with the name under <code>Resource</code>.</p>
+
+<h2 id="conclusion">Conclusion<a href="#conclusion" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>Now you can upload files directly in the S3 panel or give the &ldquo;Access key ID&rdquo; and &ldquo;Secret access key&rdquo; to your website so you can upload images through it (supposing your website already knows how to do this and you do not need to implement it yourself).</p>
+
+<h2 id="context">Context<a href="#context" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<p>I was trying to put a <a href="https://ghost.org/">Ghost</a> blog in <a href="https://heroku.com/">Heroku</a>. Since it does not support file storage I&rsquo;ve decided to use S3. I found that it is very complicated to get the idea of the policies. But once done, you do not have to worry about it.</p>
+
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="//artenesbok.com/tags/aws">AWS</a></span><span class="tag"><a href="//artenesbok.com/tags/s3">S3</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1037 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-06-25 19:12 -0400</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="//artenesbok.com/posts/why-not-use-heroku-for-your-ghost-blog/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Why Not Use Heroku for Your Ghost Blog</span>
+			</a>
+			<a class="prev-post" href="//artenesbok.com/posts/using-robolectric-for-unit-tests-in-android/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Using Robolectric for Unit Tests in Android</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2020 <a href="//artenesbok.com/">Artenes Nogueira</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="//artenesbok.com/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+	<script src="//artenesbok.com/js/main.min.35ccbf1cdceb91e4c64c06b5d009d6e2977fafe56beda7762febd4e67528d2ac.js" integrity="sha256-Ncy/HNzrkeTGTAa10AnW4pd/r+Vr7ad2L+vU5nUo0qw="></script>
+
+</body>
+
+</html>

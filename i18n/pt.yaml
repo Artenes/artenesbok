@@ -1,0 +1,14 @@
+- id: education
+  translation: Educação
+- id: experiences
+  translation: Experiência
+- id: interests
+  translation: Interesses e Hobbies
+- id: language
+  translation: Idiomas
+- id: projects
+  translation: Portfólio
+- id: skills
+  translation: Habilidades e Proficiência
+- id: summary
+  translation: Resumo
